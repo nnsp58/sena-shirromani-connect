@@ -1,0 +1,50 @@
+{
+  "name": "सैनिक शिरोमणि सिखेड़ा - ग्राम पंचायत पोर्टल",
+  "short_name": "Sikhera Portal",
+  "description": "Digital Village Portal for Sainik Shiromani Sikhera",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#1E3A8A",
+  "orientation": "portrait",
+  "lang": "hi",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/placeholder.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/placeholder.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["government", "utilities"],
+  "shortcuts": [
+    {
+      "name": "भूतपूर्व सैनिक",
+      "short_name": "Ex-Servicemen",
+      "description": "View Ex-Servicemen Information",
+      "url": "/ex-servicemen",
+      "icons": [{ "src": "/placeholder.svg", "sizes": "96x96" }]
+    },
+    {
+      "name": "योजनाएं",
+      "short_name": "Yojnas",
+      "description": "View Government Schemes",
+      "url": "/yojnas",
+      "icons": [{ "src": "/placeholder.svg", "sizes": "96x96" }]
+    },
+    {
+      "name": "शिकायत",
+      "short_name": "Complaints",
+      "description": "Submit Complaint",
+      "url": "/complaints",
+      "icons": [{ "src": "/placeholder.svg", "sizes": "96x96" }]
+    }
+  ]
+}
