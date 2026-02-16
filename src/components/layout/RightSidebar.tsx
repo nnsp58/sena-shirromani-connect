@@ -32,7 +32,7 @@ const quickLinks = [
 
 const RightSidebar = () => {
   return (
-    <aside className="fixed top-20 right-0 bottom-14 w-[300px] bg-muted z-40 shadow-[-2px_0_10px_rgba(0,0,0,0.05)]">
+    <aside className="hidden lg:block fixed top-20 right-0 bottom-14 w-[300px] bg-muted z-40 shadow-[-2px_0_10px_rgba(0,0,0,0.05)]">
       <ScrollArea className="h-full sidebar-scroll">
         <div className="p-4 space-y-5">
           {/* Village Officials */}

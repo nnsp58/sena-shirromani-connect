@@ -1,18 +1,32 @@
+import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
-  LayoutDashboard, ScrollText, ClipboardList, Users, Medal,
-  Heart, Wallet, Wheat, GraduationCap, HardHat, Home,
-  Lightbulb, Megaphone, Newspaper, Video, Info, Phone, HelpCircle,
+  LayoutDashboard,
+  ScrollText,
+  ClipboardList,
+  Users,
+  Medal,
+  Heart,
+  Wallet,
+  Wheat,
+  GraduationCap,
+  HardHat,
+  Home,
+  Lightbulb,
+  Megaphone,
+  Newspaper,
+  Video,
+  Info,
+  Phone,
+  HelpCircle,
 } from "lucide-react";
 
 const sections = [
   {
     title: null,
-    items: [
-      { label: "Dashboard", icon: LayoutDashboard, path: "/" },
-    ],
+    items: [{ label: "Dashboard", icon: LayoutDashboard, path: "/" }],
   },
   {
     title: "SERVICES",
@@ -33,7 +47,13 @@ const sections = [
     title: "COMMUNITY",
     items: [
       { label: "सुझाव", icon: Lightbulb, path: "/suggestions" },
-      { label: "शिकायत", icon: Megaphone, path: "/complaints", badge: "3", badgeVariant: "destructive" as const },
+      {
+        label: "शिकायत",
+        icon: Megaphone,
+        path: "/complaints",
+        badge: "3",
+        badgeVariant: "destructive" as const,
+      },
       { label: "ब्लॉग", icon: Newspaper, path: "/blogs" },
       { label: "वीडियो / समाचार", icon: Video, path: "/videos" },
     ],
@@ -48,15 +68,55 @@ const sections = [
   },
 ];
 
-const LeftSidebar = () => {
+interface MobileNavProps {
+  onClose: () => void;
+}
+
+const MobileNav = ({ onClose }: MobileNavProps) => {
   const location = useLocation();
 
+  useEffect(() => {
+    const handleRouteChange = () => {
+      onClose();
+    };
+
+    document.addEventListener("click", (e) => {
+      if (!(e.target as HTMLElement).closest("nav")) {
+        const target = e.target as HTMLElement;
+        if (target.tagName === "A") {
+          onClose();
+        }
+      }
+    });
+
+    return () => {
+      document.removeEventListener("click", handleRouteChange);
+    };
+  }, [onClose]);
+
   return (
-    <aside className="hidden md:block fixed top-20 left-0 bottom-14 w-[260px] bg-sidebar z-40 shadow-[2px_0_10px_rgba(0,0,0,0.1)]">
-      <ScrollArea className="h-full sidebar-scroll">
+    <>
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 bg-black/40 md:hidden z-30"
+        onClick={onClose}
+      />
+
+      {/* Drawer */}
+      <nav className="fixed top-20 left-0 bottom-0 w-64 bg-sidebar shadow-lg overflow-y-auto md:hidden z-40 animate-in slide-in-from-left">
+        <div className="flex items-center justify-between p-4 border-b border-sidebar-foreground/10">
+          <h2 className="font-hindi font-bold text-sidebar-foreground">मेनू</h2>
+          <button
+            onClick={onClose}
+            className="p-1 hover:bg-sidebar-foreground/10 rounded-lg transition-colors"
+          >
+            <X className="h-5 w-5 text-sidebar-foreground" />
+          </button>
+        </div>
+
         <div className="py-4">
           {sections.map((section, si) => (
-            <div key={si} className="mb-6">
+            <div key={si} className="mb-4">
               {section.title && (
                 <div className="text-[11px] font-bold tracking-wider text-sidebar-foreground/50 px-5 py-2 mb-1">
                   {section.title}
@@ -68,10 +128,11 @@ const LeftSidebar = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`flex items-center gap-3 px-5 py-3 font-hindi text-[15px] transition-all duration-300 relative ${
+                    onClick={onClose}
+                    className={`flex items-center gap-3 px-5 py-3 font-hindi text-[14px] transition-all duration-300 relative ${
                       active
                         ? "bg-sidebar-accent/15 text-sidebar-accent font-semibold border-l-[3px] border-sidebar-accent"
-                        : "text-sidebar-foreground/80 hover:bg-sidebar-foreground/5 hover:text-sidebar-foreground hover:pl-6 border-l-[3px] border-transparent"
+                        : "text-sidebar-foreground/80 hover:bg-sidebar-foreground/5 hover:text-sidebar-foreground border-l-[3px] border-transparent"
                     }`}
                   >
                     <item.icon className="h-5 w-5 shrink-0" />
@@ -94,9 +155,9 @@ const LeftSidebar = () => {
             </div>
           ))}
         </div>
-      </ScrollArea>
-    </aside>
+      </nav>
+    </>
   );
 };
 
-export default LeftSidebar;
+export default MobileNav;
