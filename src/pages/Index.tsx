@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import {
   Medal, Wheat, GraduationCap, ClipboardList, Heart, Users,
-  Megaphone, Newspaper, ArrowRight,
+  Megaphone, Newspaper, ArrowRight, Info,
 } from "lucide-react";
 
 const quickCards = [
@@ -14,19 +14,6 @@ const quickCards = [
   { label: "योजनाएं", icon: ClipboardList, path: "/yojnas", color: "from-info/10 to-info/20" },
   { label: "वीर नारी", icon: Heart, path: "/veer-nari", color: "from-destructive/10 to-destructive/20" },
   { label: "ग्रामवासी", icon: Users, path: "/villagers", color: "from-accent/10 to-accent/30" },
-];
-
-const announcements = [
-  { title: "प्रधानमंत्री आवास योजना - नई सूची जारी", date: "14 फरवरी 2026", type: "योजना" },
-  { title: "ग्राम सभा की बैठक 18 फरवरी को", date: "13 फरवरी 2026", type: "सूचना" },
-  { title: "किसान सम्मान निधि - आवेदन की अंतिम तिथि", date: "12 फरवरी 2026", type: "महत्वपूर्ण" },
-  { title: "स्वच्छ भारत अभियान - शौचालय निर्माण अपडेट", date: "10 फरवरी 2026", type: "अपडेट" },
-];
-
-const recentNews = [
-  { title: "गांव में नए सड़क निर्माण का कार्य शुरू", summary: "ग्राम पंचायत ने नए सड़क निर्माण का कार्य आरंभ किया है...", date: "15 फरवरी 2026" },
-  { title: "सैनिक सम्मान समारोह आयोजित", summary: "गांव के भूतपूर्व सैनिकों का सम्मान समारोह आयोजित किया गया...", date: "12 फरवरी 2026" },
-  { title: "विद्यालय में वार्षिक उत्सव", summary: "प्राथमिक विद्यालय सिखेड़ा में वार्षिक उत्सव का आयोजन...", date: "10 फरवरी 2026" },
 ];
 
 const Index = () => {
@@ -66,61 +53,30 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Announcements */}
+      {/* Announcements - Empty State */}
       <section className="mb-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-hindi text-xl font-bold text-foreground">मुख्य घोषणाएं</h2>
-          <Link to="/notices" className="text-sm text-primary hover:text-secondary font-semibold flex items-center gap-1">
-            सभी देखें <ArrowRight className="h-4 w-4" />
-          </Link>
         </div>
         <Card>
-          <CardContent className="p-0">
-            {announcements.map((a, i) => (
-              <div
-                key={i}
-                className={`flex items-center justify-between p-4 hover:bg-muted/50 transition-colors ${
-                  i < announcements.length - 1 ? "border-b border-border" : ""
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <Megaphone className="h-5 w-5 text-secondary shrink-0" />
-                  <span className="font-hindi text-sm text-foreground">{a.title}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Badge variant="outline" className="text-[11px]">{a.type}</Badge>
-                  <span className="text-xs text-muted-foreground whitespace-nowrap">{a.date}</span>
-                </div>
-              </div>
-            ))}
+          <CardContent className="p-8 text-center">
+            <Megaphone className="h-12 w-12 text-muted-foreground/40 mx-auto mb-3" />
+            <p className="font-hindi text-muted-foreground">अभी कोई घोषणा उपलब्ध नहीं है</p>
           </CardContent>
         </Card>
       </section>
 
-      {/* Recent News */}
+      {/* Recent News - Empty State */}
       <section>
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-hindi text-xl font-bold text-foreground">ताज़ा समाचार</h2>
-          <Link to="/news" className="text-sm text-primary hover:text-secondary font-semibold flex items-center gap-1">
-            सभी देखें <ArrowRight className="h-4 w-4" />
-          </Link>
         </div>
-        <div className="grid grid-cols-3 gap-4">
-          {recentNews.map((n, i) => (
-            <Card key={i} className="hover:shadow-lg transition-shadow">
-              <CardHeader className="pb-2">
-                <div className="flex items-center gap-2 mb-2">
-                  <Newspaper className="h-4 w-4 text-secondary" />
-                  <span className="text-xs text-muted-foreground">{n.date}</span>
-                </div>
-                <CardTitle className="font-hindi text-base">{n.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="font-hindi text-sm text-muted-foreground">{n.summary}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <Card>
+          <CardContent className="p-8 text-center">
+            <Newspaper className="h-12 w-12 text-muted-foreground/40 mx-auto mb-3" />
+            <p className="font-hindi text-muted-foreground">अभी कोई समाचार उपलब्ध नहीं है</p>
+          </CardContent>
+        </Card>
       </section>
     </MainLayout>
   );
