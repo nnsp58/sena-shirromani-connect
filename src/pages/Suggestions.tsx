@@ -1,40 +1,9 @@
 import MainLayout from "@/components/layout/MainLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Lightbulb, ThumbsUp, MessageSquare, Send } from "lucide-react";
+import { Lightbulb, Send } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
-const suggestions = [
-  {
-    name: "राजेश कुमार",
-    date: "10 फरवरी 2026",
-    category: "सड़क",
-    suggestion: "मुख्य सड़क पर स्ट्रीट लाइट की व्यवस्था की जाए",
-    likes: 24,
-    replies: 5,
-    status: "विचाराधीन",
-  },
-  {
-    name: "प्रिया शर्मा",
-    date: "8 फरवरी 2026",
-    category: "शिक्षा",
-    suggestion: "स्कूल में कंप्यूटर लैब की स्थापना हो",
-    likes: 18,
-    replies: 3,
-    status: "स्वीकृत",
-  },
-  {
-    name: "विकास सिंह",
-    date: "5 फरवरी 2026",
-    category: "स्वास्थ्य",
-    suggestion: "गांव में साप्ताहिक स्वास्थ्य शिविर लगे",
-    likes: 32,
-    replies: 8,
-    status: "कार्यान्वयन में",
-  },
-];
 
 const Suggestions = () => {
   return (
@@ -85,51 +54,12 @@ const Suggestions = () => {
           </CardContent>
         </Card>
 
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="font-hindi text-xl font-bold">हाल के सुझाव</h2>
-            <Badge variant="outline" className="font-hindi">{suggestions.length} सुझाव</Badge>
-          </div>
-          {suggestions.map((sug, i) => (
-            <Card key={i} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <CardTitle className="font-hindi text-lg">{sug.name}</CardTitle>
-                      <Badge variant="outline" className="text-xs">{sug.category}</Badge>
-                      <Badge
-                        className={`text-xs ${
-                          sug.status === "स्वीकृत"
-                            ? "bg-success text-white"
-                            : sug.status === "कार्यान्वयन में"
-                            ? "bg-info text-white"
-                            : "bg-muted text-foreground"
-                        }`}
-                      >
-                        {sug.status}
-                      </Badge>
-                    </div>
-                    <p className="text-sm text-muted-foreground">{sug.date}</p>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="font-hindi text-foreground mb-4">{sug.suggestion}</p>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <button className="flex items-center gap-1 hover:text-primary transition-colors">
-                    <ThumbsUp className="h-4 w-4" />
-                    <span className="font-hindi">{sug.likes} पसंद</span>
-                  </button>
-                  <button className="flex items-center gap-1 hover:text-primary transition-colors">
-                    <MessageSquare className="h-4 w-4" />
-                    <span className="font-hindi">{sug.replies} जवाब</span>
-                  </button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <Card>
+          <CardContent className="p-8 text-center">
+            <Lightbulb className="h-12 w-12 text-muted-foreground/40 mx-auto mb-3" />
+            <p className="font-hindi text-muted-foreground">अभी कोई सुझाव उपलब्ध नहीं है</p>
+          </CardContent>
+        </Card>
       </div>
     </MainLayout>
   );

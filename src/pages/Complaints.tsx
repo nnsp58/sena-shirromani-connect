@@ -1,40 +1,9 @@
 import MainLayout from "@/components/layout/MainLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Megaphone, AlertCircle, CheckCircle2, Clock, Send } from "lucide-react";
+import { Megaphone, Send } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
-const complaints = [
-  {
-    id: "C001",
-    name: "अनिल कुमार",
-    date: "12 फरवरी 2026",
-    category: "पानी",
-    complaint: "पीने का पानी दो दिन से नहीं आ रहा है",
-    status: "प्रगति में",
-    priority: "उच्च",
-  },
-  {
-    id: "C002",
-    name: "सुनीता देवी",
-    date: "10 फरवरी 2026",
-    category: "बिजली",
-    complaint: "गली में बिजली का खंभा टूटा हुआ है",
-    status: "सुलझाई गई",
-    priority: "मध्यम",
-  },
-  {
-    id: "C003",
-    name: "रमेश सिंह",
-    date: "8 फरवरी 2026",
-    category: "सड़क",
-    complaint: "मुख्य सड़क में बड़ा गड्ढा है",
-    status: "लंबित",
-    priority: "उच्च",
-  },
-];
 
 const Complaints = () => {
   return (
@@ -48,30 +17,6 @@ const Complaints = () => {
           <p className="text-muted-foreground text-lg">
             अपनी समस्या दर्ज करें, हम जल्द से जल्द समाधान करेंगे
           </p>
-        </div>
-
-        <div className="grid grid-cols-3 gap-4">
-          <Card className="bg-gradient-to-br from-destructive/10 to-destructive/20">
-            <CardContent className="p-5 text-center">
-              <AlertCircle className="h-8 w-8 text-destructive mx-auto mb-2" />
-              <div className="text-3xl font-bold text-destructive">8</div>
-              <div className="font-hindi text-sm text-muted-foreground">लंबित</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-gradient-to-br from-info/10 to-info/20">
-            <CardContent className="p-5 text-center">
-              <Clock className="h-8 w-8 text-info mx-auto mb-2" />
-              <div className="text-3xl font-bold text-info">12</div>
-              <div className="font-hindi text-sm text-muted-foreground">प्रगति में</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-gradient-to-br from-success/10 to-success/20">
-            <CardContent className="p-5 text-center">
-              <CheckCircle2 className="h-8 w-8 text-success mx-auto mb-2" />
-              <div className="text-3xl font-bold text-success">87</div>
-              <div className="font-hindi text-sm text-muted-foreground">सुलझाई गई</div>
-            </CardContent>
-          </Card>
         </div>
 
         <Card className="border-2 border-destructive/20">
@@ -111,48 +56,12 @@ const Complaints = () => {
           </CardContent>
         </Card>
 
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="font-hindi text-xl font-bold">हाल की शिकायतें</h2>
-            <Badge variant="outline" className="font-hindi">{complaints.length} शिकायत</Badge>
-          </div>
-          {complaints.map((comp, i) => (
-            <Card key={i} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <CardTitle className="font-hindi text-lg">{comp.name}</CardTitle>
-                      <Badge variant="outline" className="text-xs">{comp.id}</Badge>
-                      <Badge variant="outline" className="text-xs">{comp.category}</Badge>
-                      <Badge
-                        variant={comp.priority === "उच्च" ? "destructive" : "secondary"}
-                        className="text-xs"
-                      >
-                        {comp.priority}
-                      </Badge>
-                    </div>
-                    <p className="text-sm text-muted-foreground">{comp.date}</p>
-                  </div>
-                  <Badge
-                    className={`text-xs ${
-                      comp.status === "सुलझाई गई"
-                        ? "bg-success text-white"
-                        : comp.status === "प्रगति में"
-                        ? "bg-info text-white"
-                        : "bg-muted text-foreground"
-                    }`}
-                  >
-                    {comp.status}
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="font-hindi text-foreground">{comp.complaint}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <Card>
+          <CardContent className="p-8 text-center">
+            <Megaphone className="h-12 w-12 text-muted-foreground/40 mx-auto mb-3" />
+            <p className="font-hindi text-muted-foreground">अभी कोई शिकायत उपलब्ध नहीं है</p>
+          </CardContent>
+        </Card>
       </div>
     </MainLayout>
   );
