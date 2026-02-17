@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import LoginModal from "@/components/auth/LoginModal";
 import SignupModal from "@/components/auth/SignupModal";
-import { Menu, X } from "lucide-react";
+import ForgotPasswordModal from "@/components/auth/ForgotPasswordModal";
+import OTPVerificationModal from "@/components/auth/OTPVerificationModal";
+import { Menu } from "lucide-react";
 
 interface HeaderProps {
   onMenuClick?: () => void;
@@ -12,6 +14,8 @@ const Header = ({ onMenuClick }: HeaderProps) => {
   const location = useLocation();
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [showOTP, setShowOTP] = useState(false);
 
   const navLinks = [
     { label: "होम", path: "/" },
@@ -66,8 +70,6 @@ const Header = ({ onMenuClick }: HeaderProps) => {
             >
               साइन अप
             </button>
-
-            {/* Mobile Menu Button */}
             <button
               onClick={onMenuClick}
               className="md:hidden p-2 hover:bg-primary-foreground/10 rounded-lg transition-colors"
@@ -87,6 +89,7 @@ const Header = ({ onMenuClick }: HeaderProps) => {
         }}
         onForgotPassword={() => {
           setShowLogin(false);
+          setShowForgotPassword(true);
         }}
       />
 
@@ -96,6 +99,28 @@ const Header = ({ onMenuClick }: HeaderProps) => {
         onSwitchToLogin={() => {
           setShowSignup(false);
           setShowLogin(true);
+        }}
+      />
+
+      <ForgotPasswordModal
+        open={showForgotPassword}
+        onOpenChange={setShowForgotPassword}
+        onBackToLogin={() => {
+          setShowForgotPassword(false);
+          setShowLogin(true);
+        }}
+      />
+
+      <OTPVerificationModal
+        open={showOTP}
+        onOpenChange={setShowOTP}
+        contactInfo="आपके पंजीकृत नंबर"
+        onVerify={(otp) => {
+          console.log("OTP verified:", otp);
+          setShowOTP(false);
+        }}
+        onResend={() => {
+          console.log("OTP resend requested");
         }}
       />
     </>
